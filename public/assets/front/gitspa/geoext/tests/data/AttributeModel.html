@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+        Loads the resources of ExtJS and OpenLayers.
+
+        Use the URL-parameter `extjs` to require a specific
+        version of Ext, e.g. `Action.html?extjs=5.0.1`
+    -->
+    <script src="../../examples/include-ext.js"></script>
+    <script src="http://openlayers.org/api/2.13.1/OpenLayers.js"></script>
+
+    <script type="text/javascript">
+        Ext.Loader.setConfig({
+            enabled:true,
+            disableCaching: false,
+            paths: {
+                GeoExt: "../../src/GeoExt"
+            }
+        });
+
+        Ext.Loader.syncRequire([
+            'GeoExt.data.AttributeModel',
+            'Ext.data.writer.Json'
+        ]);
+
+        function test_constructor(t) {
+            t.plan(2);
+
+            var record;
+
+            record = Ext.create('GeoExt.data.AttributeModel', {
+                name: "foo"
+            });
+
+            t.ok(record.getProxy() instanceof Ext.data.proxy.Ajax,
+                "ctor creates an ajax proxy if none is provided");
+            t.eq(record.get("name"), "foo",
+                "ctor populates field values");
+        }
+
+        function test_extend(t) {
+            t.plan(1);
+
+            var Model = Ext.Class({
+                extend: 'GeoExt.data.AttributeModel',
+                fields: [{name: 'foo', type: 'string'}]
+            });
+
+            var fields = Model.prototype.fields;
+            if (Ext.isArray(fields)) {
+                var contained = false;
+                Ext.each(fields, function(field){
+                    if (field.name && field.name === 'foo') {
+                        contained = true;
+                        // break iteration
+                        return false;
+                    }
+                });
+                t.ok(contained,
+                        'fields are added when subclassing');
+            } else {
+	            t.ok(fields.get('foo') !== undefined,
+	                    'fields are added when subclassing');
+            }
+        }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

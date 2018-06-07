@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+        Loads the resources of ExtJS and OpenLayers.
+
+        Use the URL-parameter `extjs` to require a specific
+        version of Ext, e.g. `Action.html?extjs=5.0.1`
+    -->
+    <script src="../examples/include-ext.js"></script>
+    <script src="http://openlayers.org/api/2.13.1/OpenLayers.js"></script>
+    <script type="text/javascript">
+    Ext.Loader.setConfig({
+        disableCaching: false,
+        enabled: true,
+        paths: {
+            GeoExt: '../src/GeoExt'
+        }
+    });
+    // We require one random class of GeoExt, to see if it lists GeoExt.version
+    // as its dependency.
+    Ext.Loader.syncRequire(['GeoExt.panel.Map']);
+    </script>
+    <script type="text/javascript">
+    function test_geoext_Version_version(t) {
+        t.plan(2);
+
+        t.ok(GeoExt.Version.version,
+                "GeoExt.Version.version is defined.");
+        t.ok(/^v2/.test(GeoExt.Version.version),
+                "GeoExt.Version.version returns a string starting with 'v2'.");
+    }
+
+    function test_geoext_Version_environment(t) {
+        t.plan(4);
+
+        var environment = GeoExt.Version.environment;
+        t.ok(environment,
+                "GeoExt.Version.environment is defined.")
+        t.ok((/GeoExt/g).test(environment),
+                "GeoExt.Version.environment contains info about GeoExt.");
+        t.ok((/OpenLayers/g).test(environment),
+                "GeoExt.Version.environment contains info about OpenLayers.");
+        t.ok((/ExtJS/g).test(environment),
+                "GeoExt.Version.environment contains info about ExtJS.");
+    }
+
+    function test_geoext_version(t) {
+        t.plan(2);
+
+        t.ok(GeoExt.version,
+                "GeoExt.version is defined.");
+        t.eq(GeoExt.version, GeoExt.Version.version,
+                "GeoExt.version equals GeoExt.Version.version.");
+    }
+
+    function test_isExt4or5(t) {
+        t.plan(6);
+
+        t.ok(Ext.isDefined(GeoExt.isExt4), "GeoExt.isExt4 is defined.");
+        t.ok(Ext.isDefined(GeoExt.isExt5), "GeoExt.isExt5 is defined.");
+
+        t.ok(Ext.isBoolean(GeoExt.isExt4), "GeoExt.isExt4 is a boolean.");
+        t.ok(Ext.isBoolean(GeoExt.isExt5), "GeoExt.isExt5 is a boolean.");
+
+        t.ok(GeoExt.isExt4 === !GeoExt.isExt5,
+                "GeoExt.isExt4 is the opposite of GeoExt.isExt5.");
+
+        var majorExtVersion = Ext.versions.extjs.major;
+        if (majorExtVersion === 4) {
+            t.ok(GeoExt.isExt4, "Correctly detected ExtJS v4.x");
+        } else if (majorExtVersion === 5) {
+            t.ok(GeoExt.isExt5, "Correctly detected ExtJS v5.x");
+        } else {
+            t.fail("Unexpected Ext.versions.extjs.major: " + majorExtVersion);
+        }
+    }
+    </script>
+  <body>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{
+"type": "FeatureCollection",
+"name": "IEED",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32631" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Well(SSC)", "X": 639898.0, "Y": 902740.0 }, "geometry": { "type": "Point", "coordinates": [ 639898.0, 902740.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Borehole (250LT)", "X": 639614.0, "Y": 903113.0 }, "geometry": { "type": "Point", "coordinates": [ 639614.0, 903113.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Borehole (FirstBank)", "X": 639562.0, "Y": 903126.0 }, "geometry": { "type": "Point", "coordinates": [ 639562.0, 903126.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Borehole(MKOLT)", "X": 639261.0, "Y": 903280.0 }, "geometry": { "type": "Point", "coordinates": [ 639261.0, 903280.0 ] } },
+{ "type": "Feature", "properties": { "Name": "LAUTECH Chapel\/(well)", "X": 639061.0, "Y": 903971.0 }, "geometry": { "type": "Point", "coordinates": [ 639061.0, 903971.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Well(TetFund)", "X": 639498.0, "Y": 903554.0 }, "geometry": { "type": "Point", "coordinates": [ 639498.0, 903554.0 ] } },
+{ "type": "Feature", "properties": { "Name": "bore hole\/ man o war", "X": 639928.0, "Y": 902797.0 }, "geometry": { "type": "Point", "coordinates": [ 639928.0, 902797.0 ] } }
+]
+}
